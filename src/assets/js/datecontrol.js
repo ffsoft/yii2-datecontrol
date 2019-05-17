@@ -124,6 +124,20 @@
                     self.validate();
                     self.raise('afterpaste');
                 });
+
+            $(".datetime-picker-widget").datetimepicker({
+                todayHighlight: !0,
+                autoclose: !0,
+                format: "dd.mm.yyyy hh:ii",
+                minuteStep: 1
+            });
+
+            $(".date-picker-widget").datepicker({
+                todayHighlight: !0,
+                autoclose: !0,
+                format: "dd.mm.yyyy",
+                minuteStep: 1
+            });
         }
     };
 

@@ -35,7 +35,7 @@ use yii\helpers\Url;
  * ~~~
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
- * @since 1.0
+ * @since  1.0
  */
 class DateControl extends InputWidget
 {
@@ -54,60 +54,55 @@ class DateControl extends InputWidget
     /**
      * @var array the english date settings.
      */
-    private static $_enSettings = [
-        'days' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        'daysShort' => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        'months' => [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December',
-        ],
-        'monthsShort' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        'meridiem' => ['AM', 'PM'],
-    ];
+    private static $_enSettings
+        = [
+            'days'        => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            'daysShort'   => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            'months'      => [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ],
+            'monthsShort' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            'meridiem'    => ['AM', 'PM'],
+        ];
     /**
      * @var string data type to use for the displayed date control. One of the FORMAT constants.
      */
     public $type = self::FORMAT_DATE;
-
     /**
      * @var boolean whether to use ajaxConversion to process date format for the widget.
      */
     public $ajaxConversion;
-
     /**
      * @var string the format string for displaying the date. If not set, will automatically use the settings from the
      * [[Module]] based on the [[type]] property.
      */
     public $displayFormat;
-
     /**
      * @var string the default format string to be save the date as. If not set, will automatically use the settings
      * from the [[Module]].
      */
     public $saveFormat;
-
     /**
      * @var string the timezone for the displayed date. If not set, no timezone setting will be applied for formatting.
      * @see http://php.net/manual/en/timezones.php
      */
     public $displayTimezone;
-
     /**
      * @var string the timezone for the saved date. If not set, no timezone setting will be applied for formatting.
      * @see http://php.net/manual/en/timezones.php
      */
     public $saveTimezone;
-
     /**
      * @var boolean whether to automatically use \kartik\widgets based on `$type`. Will use these widgets:
      *
@@ -118,12 +113,10 @@ class DateControl extends InputWidget
      * If this property is not set, this will default to `true.`
      */
     public $autoWidget;
-
     /**
      * @var string any custom widget class to use. Will only be used if [[autoWidget]] is set to `false`.
      */
     public $widgetClass;
-
     /**
      * @var array the configuration options for the widget which will be parsed only in one of the following cases:
      *
@@ -133,14 +126,12 @@ class DateControl extends InputWidget
      *   the particular widget class.
      */
     public $widgetOptions = [];
-
     /**
      * @var array the HTML attributes for the display input. This property is applicable and parsed only if
      * [[autoWidget]] is `false` and [[widgetClass]] is empty or not set. For a widget, the [[widgetOptions]] must be
      * used to configure the widget settings.
      */
     public $options = [];
-
     /**
      * @var array the HTML attributes for the base model input that will be saved typically to database. The following
      * special options are recognized:
@@ -148,7 +139,6 @@ class DateControl extends InputWidget
      * - `label`: _string_, any label to be placed before the input. Will be only displayed if 'type' is 'text'.
      */
     public $saveOptions = [];
-
     /**
      * @var boolean whether to fire an asynchronous ajax request. Defaults to `true`. You can set this to `false` for
      * cases, where you need this to be fired synchronously. For example when using this widget as a filter in
@@ -176,9 +166,9 @@ class DateControl extends InputWidget
      * Parses and normalizes a date source and converts it to a [[DateTime]] object by parsing it based on specified
      * format.
      *
-     * @param string $source the date source pattern.
-     * @param string $format the date format.
-     * @param string $timezone the date timezone.
+     * @param string       $source   the date source pattern.
+     * @param string       $format   the date format.
+     * @param string       $timezone the date timezone.
      * @param array|string $settings the locale/language date settings.
      *
      * @return DateTime
@@ -197,6 +187,7 @@ class DateControl extends InputWidget
         } else {
             $timestamp = DateTime::createFromFormat($format, $source);
         }
+
         return $timestamp;
     }
 
@@ -215,14 +206,15 @@ class DateControl extends InputWidget
             $langShort = Config::getLang($lang);
             $file = __DIR__ . "{$s}locales{$s}{$langShort}{$s}dateSettings.php";
         }
+
         return $file;
     }
 
     /**
      * Parses locale data and returns an english format.
      *
-     * @param string $source the date source pattern.
-     * @param string $format the date format.
+     * @param string       $source   the date source pattern.
+     * @param string       $format   the date format.
      * @param array|string $settings the locale/language date settings.
      *
      * @return string the converted date source to english.
@@ -237,6 +229,7 @@ class DateControl extends InputWidget
                 $source = str_ireplace($settings[$key], $value, $source);
             }
         }
+
         return $source;
     }
 
@@ -244,7 +237,7 @@ class DateControl extends InputWidget
      * Checks if the format string contains the relevant date format pattern based on the passed key.
      *
      * @param string $format the date format string
-     * @param string $key the key to check
+     * @param string $key    the key to check
      *
      * @return boolean
      */
@@ -324,14 +317,21 @@ class DateControl extends InputWidget
         $date = static::getTimestamp($saveDate, $saveFormat, $this->saveTimezone, $settings);
         if ($date && $date instanceof DateTime) {
             if ($this->displayTimezone != null) {
-                $date->setTimezone(new DateTimeZone($this->displayTimezone));
+
+                if ($this->displayTimezone instanceof DateTimeZone) {
+                    $date->setTimezone($this->displayTimezone);
+                } else {
+                    $date->setTimezone(new DateTimeZone($this->displayTimezone));
+                }
             }
             $value = $date->format($this->displayFormat);
             if ($this->_doTranslate) {
                 $value = $this->translateDate($value, $this->displayFormat);
             }
+
             return $value;
         }
+
         return null;
     }
 
@@ -375,9 +375,9 @@ class DateControl extends InputWidget
         }
         if ($this->autoWidget) {
             $this->_widgetSettings = [
-                self::FORMAT_DATE => ['class' => '\kartik\date\DatePicker'],
+                self::FORMAT_DATE     => ['class' => '\kartik\date\DatePicker'],
                 self::FORMAT_DATETIME => ['class' => '\kartik\datetime\DateTimePicker'],
-                self::FORMAT_TIME => ['class' => '\kartik\time\TimePicker'],
+                self::FORMAT_TIME     => ['class' => '\kartik\time\TimePicker'],
             ];
             Config::validateInputWidget(
                 $this->_widgetSettings[$this->type]['class'],
@@ -418,6 +418,7 @@ class DateControl extends InputWidget
             if (empty($this->options['class'])) {
                 $this->options['class'] = 'form-control';
             }
+
             return Html::textInput($name, $value, $this->options);
         }
         $opts = $this->widgetOptions;
@@ -444,6 +445,7 @@ class DateControl extends InputWidget
             $opts['readonly'] = $this->readonly;
         }
         $this->widgetOptions = $opts;
+
         return $class::widget($opts);
     }
 
@@ -459,19 +461,25 @@ class DateControl extends InputWidget
 
         if ($type === 'text') {
             $this->saveOptions['tabindex'] = 10000;
-            return $label . ($this->hasModel() ?
-                    Html::activeTextInput($this->model, $this->attribute, $this->saveOptions) :
+
+            return $label . ($this->hasModel()
+                    ?
+                    Html::activeTextInput($this->model, $this->attribute, $this->saveOptions)
+                    :
                     Html::textInput($this->name, $this->value, $this->saveOptions));
         }
-        return $this->hasModel() ?
-            Html::activeHiddenInput($this->model, $this->attribute, $this->saveOptions) :
+
+        return $this->hasModel()
+            ?
+            Html::activeHiddenInput($this->model, $this->attribute, $this->saveOptions)
+            :
             Html::hiddenInput($this->name, $this->value, $this->saveOptions);
     }
 
     /**
      * Translate the date string.
      *
-     * @param string $data the input date data.
+     * @param string $data   the input date data.
      * @param string $format the input date format.
      *
      * @return string the translated date.
@@ -484,6 +492,7 @@ class DateControl extends InputWidget
                 $out = $this->translate($out, $key);
             }
         }
+
         return $out;
     }
 
@@ -491,7 +500,7 @@ class DateControl extends InputWidget
      * Translate a date pattern based on type.
      *
      * @param string $string input date string.
-     * @param string $type the type of date pattern as set in [[$_enSettings]].
+     * @param string $type   the type of date pattern as set in [[$_enSettings]].
      *
      * @return string the translated string.
      */
@@ -500,6 +509,7 @@ class DateControl extends InputWidget
         if (empty($this->pluginOptions['dateSettings'][$type])) {
             return $string;
         }
+
         return str_ireplace(self::$_enSettings[$type], $this->pluginOptions['dateSettings'][$type], $string);
     }
 
@@ -529,13 +539,14 @@ class DateControl extends InputWidget
         $pluginOptions = empty($this->pluginOptions) ? [] : $this->pluginOptions;
         $this->pluginOptions = ArrayHelper::merge(
             [
-                'idSave' => $this->saveOptions['id'],
-                'url' => $this->ajaxConversion ? Url::to($this->_module->convertAction) : '',
-                'type' => $this->type,
-                'saveFormat' => $this->saveFormat,
-                'dispFormat' => $this->displayFormat,
+                'idSave'       => $this->saveOptions['id'],
+                'url'          => $this->ajaxConversion ? Url::to($this->_module->convertAction) : '',
+                'type'         => $this->type,
+                'saveFormat'   => $this->saveFormat,
+                'dispFormat'   => $this->displayFormat,
                 'saveTimezone' => $this->saveTimezone,
-                'dispTimezone' => $this->displayTimezone,
+                'dispTimezone' => $this->displayTimezone instanceof DateTimeZone ? $this->displayTimezone->getName()
+                    : 'Europe/Prague',
                 'asyncRequest' => $this->asyncRequest,
             ], $pluginOptions
         );
