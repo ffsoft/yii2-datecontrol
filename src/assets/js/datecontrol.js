@@ -109,17 +109,21 @@
         },
         listen: function () {
             var self = this, $el = self.$element;
-            $el.on('change', function () {
-                setTimeout(function () {
+            $el
+                .on('input', function () {
                     self.validate();
-                }, 100);
-            }).on('paste', function () {
-                setTimeout(function () {
+                })
+                .on('blur', function () {
+                    self.validate();
+                })
+                .on('change', function () {
+                    self.validate();
+                })
+                .on('paste', function () {
                     $el.val($el.val());
                     self.validate();
                     self.raise('afterpaste');
-                }, 100);
-            });
+                });
         }
     };
 

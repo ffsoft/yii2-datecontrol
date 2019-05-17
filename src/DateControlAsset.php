@@ -24,7 +24,7 @@ class DateControlAsset extends AssetBundle
      */
     public function init()
     {
-        $this->depends = array_merge($this->depends, ['kartik\datecontrol\DateFormatterAsset']);
+        $this->depends = array_merge($this->depends, ['ffsoft\datecontrol\DateFormatterAsset']);
         $this->setSourcePath(__DIR__ . '/assets');
         $this->setupAssets('js', ['js/datecontrol']);
         parent::init();
