@@ -17,7 +17,7 @@
       "name": "Kartik Visweswaran",
       "email": "kartikv2@gmail.com",
       "homepage": "http://www.krajee.com/"
-    },
+    }
   ],
   "require": {
     "kartik-v/yii2-krajee-base": ">=1.9",
