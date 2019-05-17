@@ -7,7 +7,7 @@
  * @version   1.9.7
  */
 
-namespace kartik\datecontrol;
+namespace ffsoft\datecontrol;
 
 use kartik\base\AssetBundle;
 

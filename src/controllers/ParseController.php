@@ -7,13 +7,13 @@
  * @version   1.9.7
  */
 
-namespace kartik\datecontrol\controllers;
+namespace ffsoft\datecontrol\controllers;
 
 use DateTimeZone;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
-use kartik\datecontrol\DateControl;
+use ffsoft\datecontrol\DateControl;
 
 /**
  * ParseController class manages the actions for date conversion via ajax from display to save.
